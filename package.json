@@ -9,7 +9,6 @@
     "tsc": "rm -rf dist/ && tsc",
     "ts": "rm -rf dist/ && tsc -w",
     "start": "nodemon ./dist/index.js",
-    "build": "rimraf dist && tsc",
     "ts.check": "tsc --project tsconfig.json",
     "add-build": "git add dist"
   },
