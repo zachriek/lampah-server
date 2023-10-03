@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { handleError } from '../../libs/error';
-import { createNewPost, destroyPostBySlug, editPostBySlug, getPostBySlug, getPosts } from './post.service';
+import { createNewPost, destroyPostById, editPostBySlug, getPostBySlug, getPosts, uploadImage } from './post.service';
 
 export const getAllPost = async (req: Request, res: Response) => {
   try {
@@ -17,7 +17,15 @@ export const getAllPost = async (req: Request, res: Response) => {
 
 export const createPost = async (req: Request, res: Response) => {
   try {
-    const post = await createNewPost(req.body, res.locals.user.id);
+    const postData = req.body;
+
+    if (req.files) {
+      const { image } = req.files as any;
+      const postImage = await uploadImage(image.tempFilePath);
+      postData.image = postImage.secure_url;
+    }
+
+    const post = await createNewPost(postData, res.locals.user.id);
 
     return res.status(200).json({
       data: post,
@@ -63,7 +71,7 @@ export const deletePost = async (req: Request, res: Response) => {
     const findPost = await getPostBySlug(req.params.slug);
     if (!findPost) return handleError(res, 'Post not found', 404);
 
-    const post = await destroyPostBySlug(req.params.slug);
+    const post = await destroyPostById(findPost.id);
 
     return res.status(200).json({
       data: post,

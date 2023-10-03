@@ -1,4 +1,4 @@
-import { deletePostBySlug, findManyPost, findPostBySlug, insertPost, updatePostBySlug } from './post.repository';
+import { deletePostById, findManyPost, findPostBySlug, insertPost, updatePostBySlug, uploadPhotoFile } from './post.repository';
 import { TPost } from './post.types';
 
 export const getPosts = async () => {
@@ -21,7 +21,12 @@ export const editPostBySlug = async (postData: TPost, slug: string) => {
   return post;
 };
 
-export const destroyPostBySlug = async (slug: string) => {
-  const post = await deletePostBySlug(slug);
+export const destroyPostById = async (id: string) => {
+  const post = await deletePostById(id);
   return post;
+};
+
+export const uploadImage = async (image: string) => {
+  const result = await uploadPhotoFile(image);
+  return result;
 };
