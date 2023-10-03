@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.destroyPostBySlug = exports.editPostBySlug = exports.getPostBySlug = exports.createNewPost = exports.getPosts = void 0;
+exports.uploadImage = exports.destroyPostById = exports.editPostBySlug = exports.getPostBySlug = exports.createNewPost = exports.getPosts = void 0;
 const post_repository_1 = require("./post.repository");
 const getPosts = () => __awaiter(void 0, void 0, void 0, function* () {
     const posts = yield (0, post_repository_1.findManyPost)();
@@ -31,8 +31,13 @@ const editPostBySlug = (postData, slug) => __awaiter(void 0, void 0, void 0, fun
     return post;
 });
 exports.editPostBySlug = editPostBySlug;
-const destroyPostBySlug = (slug) => __awaiter(void 0, void 0, void 0, function* () {
-    const post = yield (0, post_repository_1.deletePostBySlug)(slug);
+const destroyPostById = (id) => __awaiter(void 0, void 0, void 0, function* () {
+    const post = yield (0, post_repository_1.deletePostById)(id);
     return post;
 });
-exports.destroyPostBySlug = destroyPostBySlug;
+exports.destroyPostById = destroyPostById;
+const uploadImage = (image) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield (0, post_repository_1.uploadPhotoFile)(image);
+    return result;
+});
+exports.uploadImage = uploadImage;

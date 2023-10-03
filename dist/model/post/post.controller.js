@@ -27,7 +27,13 @@ const getAllPost = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
 exports.getAllPost = getAllPost;
 const createPost = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const post = yield (0, post_service_1.createNewPost)(req.body, res.locals.user.id);
+        const postData = req.body;
+        if (req.files) {
+            const { image } = req.files;
+            const postImage = yield (0, post_service_1.uploadImage)(image.tempFilePath);
+            postData.image = postImage.secure_url;
+        }
+        const post = yield (0, post_service_1.createNewPost)(postData, res.locals.user.id);
         return res.status(200).json({
             data: post,
             message: 'Post successfully created!',
@@ -74,7 +80,7 @@ const deletePost = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         const findPost = yield (0, post_service_1.getPostBySlug)(req.params.slug);
         if (!findPost)
             return (0, error_1.handleError)(res, 'Post not found', 404);
-        const post = yield (0, post_service_1.destroyPostBySlug)(req.params.slug);
+        const post = yield (0, post_service_1.destroyPostById)(findPost.id);
         return res.status(200).json({
             data: post,
             message: 'Post successfully deleted!',

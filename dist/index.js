@@ -7,12 +7,18 @@ const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
 const body_parser_1 = __importDefault(require("body-parser"));
 const routes_1 = __importDefault(require("./routes"));
+const express_fileupload_1 = __importDefault(require("express-fileupload"));
 require("dotenv/config");
 const app = (0, express_1.default)();
 const PORT = process.env.PORT;
 app.use(express_1.default.json());
 app.use(body_parser_1.default.json());
 app.use(body_parser_1.default.urlencoded({ extended: true }));
+app.use((0, express_fileupload_1.default)({
+    limits: { fileSize: 5 * 1024 * 1024 },
+    useTempFiles: true,
+    tempFileDir: '/tmp/',
+}));
 app.use((0, cors_1.default)());
 app.use('/api/v1', routes_1.default);
 app.listen(PORT, () => console.log(`Server listening on port ${PORT}`));
