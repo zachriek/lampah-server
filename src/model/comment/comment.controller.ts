@@ -9,7 +9,7 @@ export const createComment = async (req: Request, res: Response) => {
 
     return res.status(200).json({
       data: comment,
-      message: 'Comment successfully created!',
+      message: 'Komentar berhasil dibuat!',
     });
   } catch (err: any) {
     return handleError(res, err.message);
@@ -23,7 +23,7 @@ export const updateComment = async (req: Request, res: Response) => {
 
     return res.status(200).json({
       data: comment,
-      message: 'Comment successfully updated!',
+      message: 'Komentar berhasil diperbarui!',
     });
   } catch (err: any) {
     return handleError(res, err.message);
@@ -37,7 +37,7 @@ export const deleteComment = async (req: Request, res: Response) => {
 
     return res.status(200).json({
       data: comment,
-      message: 'Comment successfully deleted!',
+      message: 'Komentar berhasil dihapus!',
     });
   } catch (err: any) {
     return handleError(res, err.message);

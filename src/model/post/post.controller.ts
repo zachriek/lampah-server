@@ -29,7 +29,7 @@ export const createPost = async (req: Request, res: Response) => {
 
     return res.status(200).json({
       data: post,
-      message: 'Post successfully created!',
+      message: 'Laporan berhasil dibuat!',
     });
   } catch (err: any) {
     return handleError(res, err.message);
@@ -59,7 +59,7 @@ export const updatePost = async (req: Request, res: Response) => {
 
     return res.status(200).json({
       data: post,
-      message: 'Post successfully updated!',
+      message: 'Laporan berhasil diperbarui!',
     });
   } catch (err: any) {
     return handleError(res, err.message);
@@ -75,7 +75,7 @@ export const deletePost = async (req: Request, res: Response) => {
 
     return res.status(200).json({
       data: post,
-      message: 'Post successfully deleted!',
+      message: 'Laporan berhasil dihapus!',
     });
   } catch (err: any) {
     return handleError(res, err.message);

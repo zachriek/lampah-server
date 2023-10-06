@@ -10,7 +10,7 @@ export const register = async (req: Request, res: Response) => {
 
     return res.status(200).json({
       data: { name, username, email, phone },
-      message: 'User successfully register!',
+      message: 'Berhasil mendaftar!',
     });
   } catch (err: any) {
     return handleError(res, err.message);
@@ -25,7 +25,7 @@ export const login = async (req: Request, res: Response) => {
 
     return res.status(200).json({
       data: { name, username, email, phone, token },
-      message: 'User successfully login!',
+      message: 'Berhasil masuk!',
     });
   } catch (err: any) {
     return handleError(res, err.message);
@@ -55,7 +55,7 @@ export const editProfile = async (req: Request, res: Response) => {
 
     return res.status(200).json({
       data: { name, username, email, phone },
-      message: 'User successfully updated!',
+      message: 'Berhasil memperbarui profil!',
     });
   } catch (err: any) {
     return handleError(res, err.message);

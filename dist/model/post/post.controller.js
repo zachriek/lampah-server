@@ -36,7 +36,7 @@ const createPost = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         const post = yield (0, post_service_1.createNewPost)(postData, res.locals.user.id);
         return res.status(200).json({
             data: post,
-            message: 'Post successfully created!',
+            message: 'Laporan berhasil dibuat!',
         });
     }
     catch (err) {
@@ -67,7 +67,7 @@ const updatePost = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         const post = yield (0, post_service_1.editPostBySlug)(req.body, req.params.slug);
         return res.status(200).json({
             data: post,
-            message: 'Post successfully updated!',
+            message: 'Laporan berhasil diperbarui!',
         });
     }
     catch (err) {
@@ -83,7 +83,7 @@ const deletePost = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         const post = yield (0, post_service_1.destroyPostById)(findPost.id);
         return res.status(200).json({
             data: post,
-            message: 'Post successfully deleted!',
+            message: 'Laporan berhasil dihapus!',
         });
     }
     catch (err) {

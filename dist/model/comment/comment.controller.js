@@ -18,7 +18,7 @@ const createComment = (req, res) => __awaiter(void 0, void 0, void 0, function* 
         const comment = yield (0, comment_service_1.createNewComment)(req.body, postId, res.locals.user.id);
         return res.status(200).json({
             data: comment,
-            message: 'Comment successfully created!',
+            message: 'Komentar berhasil dibuat!',
         });
     }
     catch (err) {
@@ -32,7 +32,7 @@ const updateComment = (req, res) => __awaiter(void 0, void 0, void 0, function* 
         const comment = yield (0, comment_service_1.editComment)(req.body, commentId);
         return res.status(200).json({
             data: comment,
-            message: 'Comment successfully updated!',
+            message: 'Komentar berhasil diperbarui!',
         });
     }
     catch (err) {
@@ -46,7 +46,7 @@ const deleteComment = (req, res) => __awaiter(void 0, void 0, void 0, function* 
         const comment = yield (0, comment_service_1.destroyComment)(commentId);
         return res.status(200).json({
             data: comment,
-            message: 'Comment successfully deleted!',
+            message: 'Komentar berhasil dihapus!',
         });
     }
     catch (err) {

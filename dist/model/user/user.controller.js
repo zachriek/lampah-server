@@ -19,7 +19,7 @@ const register = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         const { name, username, email, phone } = user;
         return res.status(200).json({
             data: { name, username, email, phone },
-            message: 'User successfully register!',
+            message: 'Berhasil mendaftar!',
         });
     }
     catch (err) {
@@ -34,7 +34,7 @@ const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         const token = (0, jwt_1.generateAccessToken)(id, username);
         return res.status(200).json({
             data: { name, username, email, phone, token },
-            message: 'User successfully login!',
+            message: 'Berhasil masuk!',
         });
     }
     catch (err) {
@@ -62,7 +62,7 @@ const editProfile = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
         const { name, username, email, phone } = user;
         return res.status(200).json({
             data: { name, username, email, phone },
-            message: 'User successfully updated!',
+            message: 'Berhasil memperbarui profil!',
         });
     }
     catch (err) {
