@@ -32,7 +32,17 @@ const insertPost = (postData, authorId) => __awaiter(void 0, void 0, void 0, fun
 });
 exports.insertPost = insertPost;
 const findPostBySlug = (slug) => __awaiter(void 0, void 0, void 0, function* () {
-    const post = yield prisma.post.findUnique({ where: { slug }, include: { comments: true, author: { select: selectAuthor } } });
+    const post = yield prisma.post.findUnique({
+        where: { slug },
+        include: {
+            comments: {
+                include: {
+                    author: { select: selectAuthor },
+                },
+            },
+            author: { select: selectAuthor },
+        },
+    });
     return post;
 });
 exports.findPostBySlug = findPostBySlug;

@@ -23,7 +23,17 @@ export const insertPost = async (postData: TPost, authorId: string) => {
 };
 
 export const findPostBySlug = async (slug: string) => {
-  const post = await prisma.post.findUnique({ where: { slug }, include: { comments: true, author: { select: selectAuthor } } });
+  const post = await prisma.post.findUnique({
+    where: { slug },
+    include: {
+      comments: {
+        include: {
+          author: { select: selectAuthor },
+        },
+      },
+      author: { select: selectAuthor },
+    },
+  });
   return post;
 };
 
