@@ -64,6 +64,8 @@ const updatePost = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         const findPost = yield (0, post_service_1.getPostBySlug)(req.params.slug);
         if (!findPost)
             return (0, error_1.handleError)(res, 'Post not found', 404);
+        if (findPost.authorId !== res.locals.user.id)
+            return (0, error_1.handleError)(res, "Post can't deleted!", 400);
         const post = yield (0, post_service_1.editPostBySlug)(req.body, req.params.slug);
         return res.status(200).json({
             data: post,

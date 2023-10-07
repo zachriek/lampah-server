@@ -17,8 +17,9 @@ const client_1 = require("@prisma/client");
 const slug_1 = __importDefault(require("slug"));
 const cloudinary_1 = require("../../libs/cloudinary");
 const prisma = new client_1.PrismaClient();
+const selectAuthor = { name: true, username: true, email: true, phone: true };
 const findManyPost = () => __awaiter(void 0, void 0, void 0, function* () {
-    const posts = yield prisma.post.findMany({ include: { author: true } });
+    const posts = yield prisma.post.findMany({ include: { author: { select: selectAuthor } } });
     return posts;
 });
 exports.findManyPost = findManyPost;
@@ -31,7 +32,7 @@ const insertPost = (postData, authorId) => __awaiter(void 0, void 0, void 0, fun
 });
 exports.insertPost = insertPost;
 const findPostBySlug = (slug) => __awaiter(void 0, void 0, void 0, function* () {
-    const post = yield prisma.post.findUnique({ where: { slug }, include: { comments: true } });
+    const post = yield prisma.post.findUnique({ where: { slug }, include: { comments: true, author: { select: selectAuthor } } });
     return post;
 });
 exports.findPostBySlug = findPostBySlug;

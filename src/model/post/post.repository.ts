@@ -5,8 +5,10 @@ import { cloudinaryUpload } from '../../libs/cloudinary';
 
 const prisma = new PrismaClient();
 
+const selectAuthor = { name: true, username: true, email: true, phone: true };
+
 export const findManyPost = async () => {
-  const posts = await prisma.post.findMany({ include: { author: true } });
+  const posts = await prisma.post.findMany({ include: { author: { select: selectAuthor } } });
   return posts;
 };
 
@@ -21,7 +23,7 @@ export const insertPost = async (postData: TPost, authorId: string) => {
 };
 
 export const findPostBySlug = async (slug: string) => {
-  const post = await prisma.post.findUnique({ where: { slug }, include: { comments: true } });
+  const post = await prisma.post.findUnique({ where: { slug }, include: { comments: true, author: { select: selectAuthor } } });
   return post;
 };
 
