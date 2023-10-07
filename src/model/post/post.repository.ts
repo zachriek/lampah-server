@@ -6,7 +6,7 @@ import { cloudinaryUpload } from '../../libs/cloudinary';
 const prisma = new PrismaClient();
 
 export const findManyPost = async () => {
-  const posts = await prisma.post.findMany();
+  const posts = await prisma.post.findMany({ include: { author: true } });
   return posts;
 };
 
