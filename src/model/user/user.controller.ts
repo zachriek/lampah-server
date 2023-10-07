@@ -36,10 +36,10 @@ export const getProfile = async (req: Request, res: Response) => {
   try {
     const user = await getUserById(res.locals.user.id);
 
-    const { name, username, email, phone } = user;
+    const { name, username, email, phone, role } = user;
 
     return res.status(200).json({
-      data: { name, username, email, phone },
+      data: { name, username, email, phone, role },
       message: 'User',
     });
   } catch (err: any) {
