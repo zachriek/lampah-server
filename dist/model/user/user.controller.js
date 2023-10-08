@@ -45,9 +45,9 @@ exports.login = login;
 const getProfile = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const user = yield (0, user_service_1.getUserById)(res.locals.user.id);
-        const { name, username, email, phone, role } = user;
+        const { id, name, username, email, phone, role } = user;
         return res.status(200).json({
-            data: { name, username, email, phone, role },
+            data: { id, name, username, email, phone, role },
             message: 'User',
         });
     }
