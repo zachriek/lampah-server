@@ -30,6 +30,8 @@ const updateComment = (req, res) => __awaiter(void 0, void 0, void 0, function* 
     try {
         const { commentId } = req.params;
         const comment = yield (0, comment_service_1.editComment)(req.body, commentId);
+        if (comment.authorId !== res.locals.user.id)
+            return (0, error_1.handleError)(res, 'Komentar tidak bisa diubah!', 400);
         return res.status(200).json({
             data: comment,
             message: 'Komentar berhasil diperbarui!',
@@ -44,6 +46,8 @@ const deleteComment = (req, res) => __awaiter(void 0, void 0, void 0, function* 
     try {
         const { commentId } = req.params;
         const comment = yield (0, comment_service_1.destroyComment)(commentId);
+        if (comment.authorId !== res.locals.user.id)
+            return (0, error_1.handleError)(res, 'Komentar tidak bisa dihapus!', 400);
         return res.status(200).json({
             data: comment,
             message: 'Komentar berhasil dihapus!',

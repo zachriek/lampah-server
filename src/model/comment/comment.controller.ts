@@ -20,6 +20,7 @@ export const updateComment = async (req: Request, res: Response) => {
   try {
     const { commentId } = req.params;
     const comment = await editComment(req.body, commentId);
+    if (comment.authorId !== res.locals.user.id) return handleError(res, 'Komentar tidak bisa diubah!', 400);
 
     return res.status(200).json({
       data: comment,
@@ -34,6 +35,7 @@ export const deleteComment = async (req: Request, res: Response) => {
   try {
     const { commentId } = req.params;
     const comment = await destroyComment(commentId);
+    if (comment.authorId !== res.locals.user.id) return handleError(res, 'Komentar tidak bisa dihapus!', 400);
 
     return res.status(200).json({
       data: comment,
