@@ -54,7 +54,7 @@ export const updatePost = async (req: Request, res: Response) => {
   try {
     const findPost = await getPostBySlug(req.params.slug);
     if (!findPost) return handleError(res, 'Post not found', 404);
-    if (findPost.authorId !== res.locals.user.id && findPost.author.role === 'USER') return handleError(res, "Post can't deleted!", 400);
+    if (findPost.authorId !== res.locals.user.id && findPost.author.role === 'USER') return handleError(res, "Post can't edited!", 400);
 
     const post = await editPostBySlug(req.body, req.params.slug);
 
@@ -71,6 +71,7 @@ export const deletePost = async (req: Request, res: Response) => {
   try {
     const findPost = await getPostBySlug(req.params.slug);
     if (!findPost) return handleError(res, 'Post not found', 404);
+    if (findPost.authorId !== res.locals.user.id && findPost.author.role === 'USER') return handleError(res, "Post can't deleted!", 400);
 
     const post = await destroyPostById(findPost.id);
 
