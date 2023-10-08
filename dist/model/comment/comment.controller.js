@@ -29,9 +29,12 @@ exports.createComment = createComment;
 const updateComment = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { commentId } = req.params;
-        const comment = yield (0, comment_service_1.editComment)(req.body, commentId);
-        if (comment.authorId !== res.locals.user.id)
+        const findComment = yield (0, comment_service_1.getCommentById)(commentId);
+        if (!findComment)
+            return (0, error_1.handleError)(res, 'Komentar tidak ditemukan!', 404);
+        if (findComment.authorId !== res.locals.user.id)
             return (0, error_1.handleError)(res, 'Komentar tidak bisa diubah!', 400);
+        const comment = yield (0, comment_service_1.editComment)(req.body, commentId);
         return res.status(200).json({
             data: comment,
             message: 'Komentar berhasil diperbarui!',
@@ -45,9 +48,12 @@ exports.updateComment = updateComment;
 const deleteComment = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { commentId } = req.params;
-        const comment = yield (0, comment_service_1.destroyComment)(commentId);
-        if (comment.authorId !== res.locals.user.id)
+        const findComment = yield (0, comment_service_1.getCommentById)(commentId);
+        if (!findComment)
+            return (0, error_1.handleError)(res, 'Komentar tidak ditemukan!', 404);
+        if (findComment.authorId !== res.locals.user.id)
             return (0, error_1.handleError)(res, 'Komentar tidak bisa dihapus!', 400);
+        const comment = yield (0, comment_service_1.destroyComment)(commentId);
         return res.status(200).json({
             data: comment,
             message: 'Komentar berhasil dihapus!',

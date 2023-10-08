@@ -16,10 +16,10 @@ exports.uploadPhotoFile = exports.deletePostById = exports.updatePostBySlug = ex
 const client_1 = require("@prisma/client");
 const slug_1 = __importDefault(require("slug"));
 const cloudinary_1 = require("../../libs/cloudinary");
+const user_repository_1 = require("../user/user.repository");
 const prisma = new client_1.PrismaClient();
-const selectAuthor = { name: true, username: true, email: true, phone: true, role: true };
 const findManyPost = () => __awaiter(void 0, void 0, void 0, function* () {
-    const posts = yield prisma.post.findMany({ include: { author: { select: selectAuthor } } });
+    const posts = yield prisma.post.findMany({ include: { author: { select: user_repository_1.selectAuthor } } });
     return posts;
 });
 exports.findManyPost = findManyPost;
@@ -37,10 +37,10 @@ const findPostBySlug = (slug) => __awaiter(void 0, void 0, void 0, function* () 
         include: {
             comments: {
                 include: {
-                    author: { select: selectAuthor },
+                    author: { select: user_repository_1.selectAuthor },
                 },
             },
-            author: { select: selectAuthor },
+            author: { select: user_repository_1.selectAuthor },
         },
     });
     return post;

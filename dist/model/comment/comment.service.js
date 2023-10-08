@@ -9,13 +9,18 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.destroyComment = exports.editComment = exports.createNewComment = void 0;
+exports.destroyComment = exports.editComment = exports.getCommentById = exports.createNewComment = void 0;
 const comment_repository_1 = require("./comment.repository");
 const createNewComment = (commentData, postId, authorId) => __awaiter(void 0, void 0, void 0, function* () {
     const comment = (0, comment_repository_1.insertComment)(commentData, postId, authorId);
     return comment;
 });
 exports.createNewComment = createNewComment;
+const getCommentById = (commentId) => __awaiter(void 0, void 0, void 0, function* () {
+    const post = yield (0, comment_repository_1.findCommentById)(commentId);
+    return post;
+});
+exports.getCommentById = getCommentById;
 const editComment = (commentData, commentId) => __awaiter(void 0, void 0, void 0, function* () {
     const comment = (0, comment_repository_1.updateCommentById)(commentData, commentId);
     return comment;

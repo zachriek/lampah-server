@@ -2,10 +2,9 @@ import { PrismaClient } from '@prisma/client';
 import { TPost } from './post.types';
 import slug from 'slug';
 import { cloudinaryUpload } from '../../libs/cloudinary';
+import { selectAuthor } from '../user/user.repository';
 
 const prisma = new PrismaClient();
-
-const selectAuthor = { name: true, username: true, email: true, phone: true, role: true };
 
 export const findManyPost = async () => {
   const posts = await prisma.post.findMany({ include: { author: { select: selectAuthor } } });

@@ -53,8 +53,8 @@ export const getPost = async (req: Request, res: Response) => {
 export const updatePost = async (req: Request, res: Response) => {
   try {
     const findPost = await getPostBySlug(req.params.slug);
-    if (!findPost) return handleError(res, 'Post not found', 404);
-    if (findPost.authorId !== res.locals.user.id && findPost.author.role === 'USER') return handleError(res, "Post can't edited!", 400);
+    if (!findPost) return handleError(res, 'Laporan tidak ditemukan!', 404);
+    if (findPost.authorId !== res.locals.user.id) return handleError(res, 'Laporan tidak bisa diubah!', 400);
 
     const post = await editPostBySlug(req.body, req.params.slug);
 
@@ -70,8 +70,8 @@ export const updatePost = async (req: Request, res: Response) => {
 export const deletePost = async (req: Request, res: Response) => {
   try {
     const findPost = await getPostBySlug(req.params.slug);
-    if (!findPost) return handleError(res, 'Post not found', 404);
-    if (findPost.authorId !== res.locals.user.id && findPost.author.role === 'USER') return handleError(res, "Post can't deleted!", 400);
+    if (!findPost) return handleError(res, 'Laporan tidak ditemukan!', 404);
+    if (findPost.authorId !== res.locals.user.id) return handleError(res, 'Laporan tidak bisa dihapus!', 400);
 
     const post = await destroyPostById(findPost.id);
 

@@ -3,6 +3,8 @@ import { TCreateUser, TEditUser } from './user.types';
 
 const prisma = new PrismaClient();
 
+export const selectAuthor = { id: true, name: true, username: true, email: true, phone: true, role: true };
+
 export const insertUser = async (userData: TCreateUser) => {
   const { name, username, email, phone, password } = userData;
 

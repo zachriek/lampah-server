@@ -9,9 +9,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.updateUserById = exports.findUserById = exports.findUserByUsername = exports.insertUser = void 0;
+exports.updateUserById = exports.findUserById = exports.findUserByUsername = exports.insertUser = exports.selectAuthor = void 0;
 const client_1 = require("@prisma/client");
 const prisma = new client_1.PrismaClient();
+exports.selectAuthor = { id: true, name: true, username: true, email: true, phone: true, role: true };
 const insertUser = (userData) => __awaiter(void 0, void 0, void 0, function* () {
     const { name, username, email, phone, password } = userData;
     const user = yield prisma.user.create({

@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteCommentById = exports.updateCommentById = exports.insertComment = void 0;
+exports.deleteCommentById = exports.updateCommentById = exports.findCommentById = exports.insertComment = void 0;
 const client_1 = require("@prisma/client");
 const prisma = new client_1.PrismaClient();
 const insertComment = (commentData, postId, authorId) => __awaiter(void 0, void 0, void 0, function* () {
@@ -20,6 +20,11 @@ const insertComment = (commentData, postId, authorId) => __awaiter(void 0, void 
     return newComment;
 });
 exports.insertComment = insertComment;
+const findCommentById = (commentId) => __awaiter(void 0, void 0, void 0, function* () {
+    const comment = yield prisma.comment.findUnique({ where: { id: commentId } });
+    return comment;
+});
+exports.findCommentById = findCommentById;
 const updateCommentById = (commentData, commentId) => __awaiter(void 0, void 0, void 0, function* () {
     const { comment } = commentData;
     const newComment = yield prisma.comment.update({

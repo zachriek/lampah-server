@@ -1,5 +1,6 @@
 import { PrismaClient } from '@prisma/client';
 import { TComment } from './comment.types';
+import { selectAuthor } from '../user/user.repository';
 
 const prisma = new PrismaClient();
 
@@ -11,6 +12,11 @@ export const insertComment = async (commentData: TComment, postId: string, autho
   });
 
   return newComment;
+};
+
+export const findCommentById = async (commentId: string) => {
+  const comment = await prisma.comment.findUnique({ where: { id: commentId } });
+  return comment;
 };
 
 export const updateCommentById = async (commentData: TComment, commentId: string) => {
