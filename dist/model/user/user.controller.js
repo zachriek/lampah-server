@@ -59,9 +59,9 @@ exports.getProfile = getProfile;
 const editProfile = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const user = yield (0, user_service_1.editUserById)(res.locals.user.id, req.body);
-        const { name, username, email, phone } = user;
+        const { name, username, email, phone, image } = user;
         return res.status(200).json({
-            data: { name, username, email, phone },
+            data: { name, username, email, phone, image },
             message: 'Berhasil memperbarui profil!',
         });
     }
