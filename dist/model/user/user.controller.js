@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.editProfile = exports.getProfile = exports.login = exports.register = void 0;
+exports.editImage = exports.editProfile = exports.getProfile = exports.login = exports.register = void 0;
 const user_service_1 = require("./user.service");
 const jwt_1 = require("../../libs/jwt");
 const error_1 = require("../../libs/error");
@@ -70,3 +70,21 @@ const editProfile = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
     }
 });
 exports.editProfile = editProfile;
+const editImage = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        if (!req.files) {
+            res.status(400).json({
+                error: 'Gambar harus dimasukkan',
+            });
+        }
+        const { image } = req.files;
+        yield (0, user_service_1.uploadImageById)(res.locals.user.id, image.tempFilePath);
+        return res.status(200).json({
+            message: 'Berhasil memperbarui gambar profil!',
+        });
+    }
+    catch (err) {
+        return (0, error_1.handleError)(res, err.message);
+    }
+});
+exports.editImage = editImage;

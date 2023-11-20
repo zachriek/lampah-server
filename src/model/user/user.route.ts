@@ -1,7 +1,7 @@
 import express from 'express';
 import { validate } from '../../libs/zod';
-import { loginSchema, registerSchema, userSchema } from './user.schema';
-import { editProfile, getProfile, login, register } from './user.controller';
+import { imageSchema, loginSchema, registerSchema, userSchema } from './user.schema';
+import { editImage, editProfile, getProfile, login, register } from './user.controller';
 import { authenticateToken } from '../../libs/jwt';
 
 const router = express.Router();
@@ -13,5 +13,6 @@ router.use(authenticateToken);
 
 router.get('/me', getProfile);
 router.patch('/me', validate(userSchema), editProfile);
+router.patch('/me/image', validate(imageSchema), editImage);
 
 export default router;

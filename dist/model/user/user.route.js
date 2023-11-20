@@ -14,4 +14,5 @@ router.post('/login', (0, zod_1.validate)(user_schema_1.loginSchema), user_contr
 router.use(jwt_1.authenticateToken);
 router.get('/me', user_controller_1.getProfile);
 router.patch('/me', (0, zod_1.validate)(user_schema_1.userSchema), user_controller_1.editProfile);
+router.patch('/me/image', (0, zod_1.validate)(user_schema_1.imageSchema), user_controller_1.editImage);
 exports.default = router;
