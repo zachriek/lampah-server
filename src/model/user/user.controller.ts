@@ -71,9 +71,10 @@ export const editImage = async (req: Request, res: Response) => {
 			});
 		}
 		const { image } = req.files as any;
-		await uploadImageById(res.locals.user.id, image.tempFilePath);
+		const userImage = await uploadImageById(res.locals.user.id, image.tempFilePath);
 
 		return res.status(200).json({
+			data: { image: userImage.secure_url },
 			message: 'Berhasil memperbarui gambar profil!',
 		});
 	} catch (err: any) {

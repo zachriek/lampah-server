@@ -78,8 +78,9 @@ const editImage = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             });
         }
         const { image } = req.files;
-        yield (0, user_service_1.uploadImageById)(res.locals.user.id, image.tempFilePath);
+        const userImage = yield (0, user_service_1.uploadImageById)(res.locals.user.id, image.tempFilePath);
         return res.status(200).json({
+            data: { image: userImage.secure_url },
             message: 'Berhasil memperbarui gambar profil!',
         });
     }
