@@ -37,10 +37,10 @@ export const getProfile = async (req: Request, res: Response) => {
 	try {
 		const user = await getUserById(res.locals.user.id);
 
-		const { id, name, username, email, phone, role } = user;
+		const { id, name, username, email, phone, role, image } = user;
 
 		return res.status(200).json({
-			data: { id, name, username, email, phone, role },
+			data: { id, name, username, email, phone, role, image },
 			message: 'User',
 		});
 	} catch (err: any) {
